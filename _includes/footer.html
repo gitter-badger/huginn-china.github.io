@@ -1,38 +1,62 @@
-<footer class="site-footer">
+		<!-- Footer -->
+			<div id="footer-wrapper">
+				<section id="footer" class="container">
+					<div class="row">
+						<div class="12u">
+							<section>
+								<header>
+									<h2>欢迎联系或加入我们</h2>
+								</header>
+								<ul class="social">
+									<li><a class="icon fa-weibo" href="#"><span class="label">微博</span></a></li>
+									<li><a class="icon fa-weixin" href="#"><span class="label">微信</span></a></li>
+									<li><a class="icon fa-qq" href="#"><span class="label">qq</span></a></li>
+									<li><a class="icon fa-github" href="#"><span class="label">github</span></a></li>
+								</ul>
+								<ul class="contact">
+									<li>
+										<h3>Mail</h3>
+										<p><a href="#">someone@gmail.com</a></p>
+									</li>
+									<li>
+										<h3>Phone</h3>
+										<p>(+86) 000-0000</p>
+									</li>
+								</ul>
+							</section>
+						</div>
+					</div>
 
-  <div class="wrapper">
+					<div class="row">
+						<div class="12u">
+							<!-- Copyright -->
+								<div id="copyright">
+									<ul class="links">
+										<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">Huginn-China</a></li>
+									</ul>
+								</div>
 
-    <h2 class="footer-heading">{{ site.title }}</h2>
+						</div>
+					</div>
+				</section>
+			</div>
+		<!--<script src="{{ site.baseurl }}/assets/js/jquery.dropotron.min.js"></script>-->
+		<script src="{{ site.baseurl }}/assets/js/skel.min.js"></script>
+		<script src="{{ site.baseurl }}/assets/js/skel-layers.min.js"></script>
+		<script src="{{ site.baseurl }}/assets/js/init.js"></script>
+		<script>
+			$(function () {
+				var oLis = $("#nav li");
+				var urlPre = window.location.pathname.substr(1,4);
+				for(var i = 0; i < oLis.length; i++){
+					var a = oLis[i].getElementsByTagName("a")[0].getAttribute("href").substr(1,4);
+					if(a == urlPre){
+						oLis[0].setAttribute("class", " ");
+						oLis[i].setAttribute("class","current");
+					}
+				}
 
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li>{{ site.title }}</li>
-          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-2">
-        <ul class="social-media-list">
-          {% if site.github_username %}
-          <li>
-            {% include icon-github.html username=site.github_username %}
-          </li>
-          {% endif %}
-
-          {% if site.twitter_username %}
-          <li>
-            {% include icon-twitter.html username=site.twitter_username %}
-          </li>
-          {% endif %}
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-3">
-        <p>{{ site.description }}</p>
-      </div>
-    </div>
-
-  </div>
-
-</footer>
+			});
+		</script>
+	</body>
+</html>

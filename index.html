@@ -1,23 +1,110 @@
 ---
-layout: default
+title: Huginn-China
+layout: landing
 ---
+  
+	<body class="homepage">
+	{% include header_landing.html %}
 
-<div class="home">
+		<!-- Main -->
+			<div id="main-wrapper">
+				<div class="container">
+					<div class="row">
+						<div class="12u">
 
-  <h1 class="page-heading">Posts</h1>
+							<!-- Portfolio -->
+								<section>
+									<header class="major">
+										<h2>最新文章</h2>
+									</header>
+									<div class="row">
+										<div class="9u">
+											<ul class="post-list">
+												{% for post in site.posts %}
+												<li>
+													<span class="post-meta">{{ post.author }} 发表于:{{ post.date | date: "%b %-d, %Y" }}-分类:{{ post.categories}}</span>
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+													<h2>
+														<a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+													</h2>
+												</li>
+												{% endfor %}
+											</ul>
+												{% if paginator.total_pages > 1 %}
+												<div class="pagination">
+													{% if paginator.previous_page %}
+													<a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
+													{% else %}
+													<span>&laquo; Prev</span>
+													{% endif %}
 
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
+													{% for page in (1..paginator.total_pages) %}
+													{% if page == paginator.page %}
+													<em>{{ page }}</em>
+													{% elsif page == 1 %}
+													<a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+													{% else %}
+													<a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+													{% endif %}
+													{% endfor %}
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+													{% if paginator.next_page %}
+													<a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
+													{% else %}
+													<span>Next &raquo;</span>
+													{% endif %}
+												</div>
+												{% endif %}
+										</div>
 
-</div>
+										<div class="3u">
+											<div id="tag-cloud"></div>
+											<div id="tag_sidebar" >
+												{% for tag in site.tags %}
+												<a href="{{site.baseurl}}/tags/?tag={{tag[0] | cgi}}" title="{{ tag[0] }}">
+													{{ tag[0] }}<sup>{{ tag[1].size }}</sup>&nbsp;
+												</a>
+												{% endfor %}
+											</div>
+										</div>
+										<script src="{{ site.baseurl }}/assets/js/jquery.svg3dtagcloud.min.js"></script>
+										<script>
+											$(function(){
+												var entries =[];
+												var oLinks = $("#tag_sidebar > a");
+												for(var i=0; i<oLinks.length;i++){
+													var tmpObj={};
+													tmpObj={
+														label : oLinks[i].title,
+														url : oLinks[i].href,
+														target:'_blank'
+													};
+													entries[i] = tmpObj;
+												}
+												var settings = {
+
+													entries: entries,
+													width: 320,
+													height: 480,
+													radius: '65%',
+													radiusMin: 75,
+													bgDraw: true,
+													bgColor: '#fafafa',
+													opacityOver: 1.00,
+													opacityOut: 0.05,
+													opacitySpeed: 6,
+													fov: 800,
+													speed: 0.5,
+													fontFamily: 'Oswald, Arial, sans-serif',
+													fontSize: '15',
+													fontColor: '#0000ff'
+
+												};
+												$('#tag-cloud').svg3DTagCloud(settings);
+											})();
+										</script>
+									</div>
+								</section>
+
+						</div>
+					</div>
