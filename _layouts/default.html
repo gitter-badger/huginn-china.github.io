@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html>
+{% include header.html %}
 
-  {% include head.html %}
+{% if page.hero %}
+  {% include hero.html %}
+{% endif %}
 
-  <body>
+<section class='content'>
+<div class='width'>
+<article>
 
-    {% include header.html %}
+{{ content }}
 
-    <div class="page-content">
-      <div class="wrapper">
-        {{ content }}
-      </div>
-    </div>
-
-    {% include footer.html %}
-
-  </body>
-
-</html>
+</article>
+</div>
+</section>
+{% include footer.html %}
