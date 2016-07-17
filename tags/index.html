@@ -12,15 +12,7 @@ layout: default
 
                 <!-- Blog -->
                 <ul class="post-list">
-                    {% for post in site.categories.life %}
-                    <li>
-                        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
-                        <h2>
-                            <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                        </h2>
-                    </li>
-                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -51,27 +43,22 @@ layout: default
         $('.home > h1').html('All Posts in '+tag);
         var html='';
         if(tag){
-            console.log("tag:"+tag);
             $.getJSON('../post.json',function(data){
-                console.log("data:"+data);
                 $.each(data,function(i,item){
-                    console.log("tags:"+item.tags);
                     $.each(item.tags,function(j,tagterm){
 
                         if(tagterm == tag){
-                            console.log("ok");
                             html += '<li>';
                             html += '<span class="post-meta">'+item.date+'</span>';
                             html += '<h2><a class="post-link" href="'+item.url+'">'+item.title+'</a></h2>';
                             html += '</li>';
-                            console.log("li:"+html);
                         }
                     });
-                    console.log("html:"+html);
                 });
-            });
 
-            $('.post-list').html(html);
+                $('.post-list').html(html);
+
+            });
         }
 
     });
